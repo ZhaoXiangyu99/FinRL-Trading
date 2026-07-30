@@ -1,0 +1,48 @@
+{
+  "run_name": "qwen3_8b_qqq_spy_format_sft_v1",
+  "model": {
+    "id": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "local_path": "/root/autodl-tmp/models/Qwen3-8B"
+  },
+  "data": {
+    "train": "data/agentic/qqq_spy_qwen_sft_v1/train.jsonl",
+    "validation": "data/agentic/qqq_spy_qwen_sft_v1/validation.jsonl",
+    "metadata": "data/agentic/qqq_spy_qwen_sft_v1/metadata.json"
+  },
+  "output_dir": "/root/autodl-tmp/agentic-runs/qwen3_8b_qqq_spy_format_sft_v1",
+  "quantization": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "bnb_4bit_compute_dtype": "bfloat16"
+  },
+  "lora": {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": "all-linear",
+    "bias": "none"
+  },
+  "training": {
+    "seed": 42,
+    "max_length": 1536,
+    "num_train_epochs": 1.0,
+    "per_device_train_batch_size": 1,
+    "per_device_eval_batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "learning_rate": 0.0002,
+    "warmup_ratio": 0.03,
+    "lr_scheduler_type": "cosine",
+    "logging_steps": 5,
+    "eval_steps": 50,
+    "save_steps": 50,
+    "save_total_limit": 2,
+    "gradient_checkpointing": true,
+    "bf16": true,
+    "tf32": true,
+    "packing": false,
+    "optim": "paged_adamw_8bit",
+    "report_to": "none"
+  }
+}
